@@ -12,6 +12,6 @@ class Activity extends Model
     
     protected $table = 'activity';
     protected $fillable = [
-        'add', 'date'
+        'add', 'date', 'status'
     ];
 }

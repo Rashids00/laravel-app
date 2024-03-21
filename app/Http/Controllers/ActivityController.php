@@ -10,7 +10,7 @@ class ActivityController
 {
     public function index()
     {
-        $activity = Activity::latest()->get();
+        $activity = Activity::orderBy('date', 'asc')->get();
         return view('activity', compact('activity'));
     }
 
@@ -33,4 +33,27 @@ class ActivityController
         $activity->delete();
         return redirect()->back()->with('success', 'Activity deleted successfully');
     }
+
+    public function update(Request $request, $id)
+    {
+    $validatedData = $request->validate([
+        'add' => 'required|string|max:255',
+        'date' => 'required|date',
+    ]);
+
+    $activity = Activity::findOrFail($id);
+    $activity->update($validatedData);
+
+    return redirect()->route('activity.index')->with('success', 'Activity updated successfully.');
+    }
+
+    public function Completed(Request $request, $id)
+    {
+        $activity = Activity::findOrFail($id);
+        $activity->status = $request->input('completed') === '1';
+        $activity->save();
+
+        return redirect()->route('activity.index');
+    }
+
 }

@@ -14,6 +14,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('add');
             $table->date('date');
+            $table->boolean('status')->default(false);
         });
     }
 
