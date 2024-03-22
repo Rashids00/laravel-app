@@ -8,3 +8,4 @@ Route::post('/activity', [ActivityController::class, 'store'])->name('activity.s
 Route::put('/activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
 Route::delete('/activity/{id}', [ActivityController::class, 'delete'])->name('activity.delete');
 Route::post('/activity/{id}/toggle', [ActivityController::class, 'Completed'])->name('activity.toggle');
+Route::get('/filter', [ActivityController::class, 'index'])->name('filter');

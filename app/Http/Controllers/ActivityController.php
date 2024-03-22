@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 
 class ActivityController
 {
-    public function index()
+    public function index(Request $request)
     {
-        $activity = Activity::orderBy('date', 'asc')->get();
-        return view('activity', compact('activity'));
+        $selectedDate = $request->input('date', now()->format('Y-m-d'));
+        $activity = Activity::whereDate('date', $selectedDate)->orderBy('date', 'asc')->get();
+        return view('activity', compact('activity', 'selectedDate'));
     }
 
     public function store(Request $request)
